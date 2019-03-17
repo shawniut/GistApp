@@ -11,9 +11,12 @@
 // about supported directives.
 //
 //= require jquery3
+//= require_directory ./jquery_validation
 //= require popper
 //= require bootstrap
 //= require rails-ujs
+//= require_directory ./knockout
 //= require activestorage
-//= require turbolinks
+
+//= require toastr
 //= require_tree .

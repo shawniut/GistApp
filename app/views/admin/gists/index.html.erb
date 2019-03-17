@@ -1,0 +1,49 @@
+<!-- All Gists -->
+<div class="container" id='gists-index'>
+    <div class="row">
+        <div class="col-lg-6 page-title">
+            <h3 >My Gists <span data-bind="text: '('+ gists().length + '/' + pager().TotalCount() + ')', visible:gists().length> 1"></span></h3>
+        </div>
+        <div class="col-lg-6 text-right page-title">
+            <div>
+                <a class="btn btn-primary" href="/admin/gists/new">Create</a>
+                <button class="btn btn-primary">Create Multiple</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <table class="table" data-bind='visible:gists().length>0'>
+            <thead>
+              <th>Description</th>
+              <th>Files</th>
+              <th>Comment</th>
+              <th>Created At</th>
+              <th>Remove</th>
+            </thead>
+            <tbody data-bind='foreach: gists'>
+                <tr>
+                    <td>
+                        <a data-bind="text:description,attr:{href:'/admin/gists/'+ id() + '/edit'}"></a>
+                    </td>
+                    <td >
+                        <span data-bind='text:files().length'></span> File(s)
+                    </td>
+                    <td >
+                        <span data-bind='text:comments_count'></span> Comment(s)
+                    </td>
+                    <td >
+                        <span data-bind='text:created_at_display'></span>
+                    </td>
+                    <td>
+                      <button class="btn btn-danger" data-bind="click:$root.deleteGist">Delete</button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+          <%=render 'shared/pager'%>
+        </div>
+    </div>   
+</div>

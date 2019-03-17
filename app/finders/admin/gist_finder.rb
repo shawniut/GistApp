@@ -8,6 +8,8 @@ class Admin::GistFinder < BaseFinder
     response = @gist_client.list :private, per_page:@per_page, page:@page
     Result.new(true,nil,map_results(response),meta:pagination_dict(response) )
   rescue Exception => e
+    puts e.message
+    puts e.backtrace
     return_error_result
   end
 
@@ -15,13 +17,34 @@ class Admin::GistFinder < BaseFinder
     response = @gist_client.starred :private, per_page:@per_page, page:@page
     Result.new(true,nil,map_results(response),meta:pagination_dict(response) )
   rescue Exception => e
-    return_error_result
+    return_error_result(e)
   end
+
+  def find(id)
+    response = @gist_client.get id
+    gist = Gist.new
+    gist.build_from_response(response)
+    Result.new(true,nil,gist)
+  rescue Exception => e
+    puts e.message
+    puts e.backtrace
+    return_error_result(e)
+  end
+
 
   private
 
   def map_results(response)
-    response.map { |g| Gist.new(id: g.id, description: g.description, created_at: DateTime.parse(g.created_at)) }
+    response.map { |gits|  map_gist(gits)}
+  end
+
+  def map_gist(response)
+    gist = Gist.new(id: response.id,comments_count:response.comments, description: response.description, created_at: DateTime.parse(response.created_at))
+    gist.files = []
+    response.files.each do |k,f|
+      gist.files <<  GistFile.new(filename:f.filename,language:f.language,type:f.type,size:f.size)
+    end
+    gist
   end
 
 end

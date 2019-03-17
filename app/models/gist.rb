@@ -2,24 +2,29 @@ class Gist
   include ActiveModel::Serialization
   extend ActiveModel::Naming
   include ActiveModel::Validations
-  attr_accessor :id, :description, :created_at, :comments, :files
+  attr_accessor :id, :description, :created_at,:updated_at, :comments_count, :files,:histories
 
   validates_presence_of :description
 
-  def initialize args
-    @id           = args[:id]
-    @description  = args[:description]
-    @created_at   = args[:created_at]
-    @comments     = args[:comments]
-    @files        = args[:files].map { |v| GistFile.new(v) } if args[:files].present?
-
+  def initialize args={}
+    hash = HashWithIndifferentAccess.new(args)
+    puts hash['description']
+    puts hash[:description]
+    @id                 = hash[:id]
+    @description        = hash[:description]
+    @created_at         = hash[:created_at]
+    @comments_count     = hash[:comments_count]
+    @files              = hash[:files].map { |v| GistFile.new(v) } if args[:files].present?
+    @histories          = hash[:histories].map { |v| GistFile.new(v) } if args[:histories].present?
   end
 
   def build_from_response(object)
-    self.id           = object.id
-    self.description  = object.description
-    self.created_at   = DateTime.parse(object.created_at)
-    self.files        = object.file.map { |f| GistFile.new(filename:f.filename,language:f.language,type:f.type) }
+    self.id                 = object.id
+    self.description        = object.description
+    self.comments_count     = object.comments
+    self.created_at         = DateTime.parse(object.created_at)
+    self.updated_at         = DateTime.parse(object.updated_at)
+    self.files              = object.files.map { |filename,file| GistFile.new(filename:filename,content:file.content,language:file.language,type:file.type,size:file.size,truncated:file.truncated) }
   end
 
   def to_api

@@ -1,0 +1,18 @@
+<!-- Create New -->
+ <%=content_tag "div", id: "gist_data", data: {is_edit: false} do%>
+<%end%>
+<div class="container" id='gists_create_edit'>
+  <div class="row">
+      <div class="col-lg-6 page-title">
+          <h3> Create New Gist</h3>
+      </div>
+      <div class="col-lg-6 text-right page-title">
+          <div>
+          <button class="btn btn-primary" data-bind='click:$root.allGist'>All Gist</button>
+
+          </div>
+      </div>
+  </div>
+  <%=render partial: 'gist_form'%>
+
+</div>

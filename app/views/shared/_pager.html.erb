@@ -1,0 +1,23 @@
+<!-- ko with:pager()-->
+    <ul data-bind="visible: NeedPaging" class="pagination">
+        <li class="page-item" data-bind="css: { disabled: !FirstPageActive() }">
+            <a class="page-link" data-bind="click: GoToFirst">«</a>
+        </li>
+        <li class="page-item" data-bind="css: { disabled: !PreviousPageActive() }">
+            <a class="page-link" data-bind="click: GoToPrevious">‹</a>
+        </li>
+
+        <!-- ko foreach: GetPages() -->
+        <li class="page-item" data-bind="css: { active: $parent.CurrentPage() === $data }">
+            <a class="page-link" data-bind="click: $parent.GoToPage, text: $data"></a>
+        </li>
+        <!-- /ko -->
+
+        <li class="page-item" data-bind="css: { disabled: !NextPageActive() }">
+            <a class="page-link" data-bind="click: GoToNext">›</a>
+        </li>
+        <li class="page-item" data-bind="css: { disabled: !LastPageActive() }">
+            <a class="page-link" data-bind="click: GoToLast">»</a>
+        </li>
+    </ul>
+<!-- /ko -->

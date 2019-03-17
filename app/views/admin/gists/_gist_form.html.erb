@@ -1,0 +1,43 @@
+  
+  <div class="content" data-bind='with:$root.gist'>
+    <form id="gist_form" class="form">
+      <div class="form-group">
+        <input type="text" name ="description" class="form-control" data-bind='value:description', placeholder='Gist description...'/>
+      </div>
+
+      <!--ko foreach: files-->
+        <div data-bind='visible: !deleted()'>
+          <div class="row" >
+            <div class="col-md-8">
+             <div class="form-group">
+                <input type="text"class="form-control" data-bind='value:filename,attr:{name:"filename["+$index()+"]"}' placeholder='file.txt'/>
+              </div>
+            </div>
+            <!--ko if: $root.isEdit() -->
+            <div class="col-md-4">
+              <button class="btn btn-danger pull-right" data-bind='click:$root.removeFile'>Remove</button>
+            </div>
+            <!--/ko-->
+          </div>
+         
+
+          <div class="form-group">
+            <label>Content</label>
+            <textarea class="form-control" data-bind='value:content,attr:{name:"content["+$index()+"]"}' rows="10"></textarea> 
+          </div>
+
+          <hr>
+        </div>
+      <!--/ko-->
+      <button class="btn btn-primary" data-bind='click:$root.addFileClick'>Add File</button>
+      <hr>
+      <!--ko if: !$root.isEdit() -->
+      <button class="btn btn-primary float-right" data-bind='click:$root.createGist'>Create Secret Gist</button>
+      <!--/ko-->
+      <!--ko if: $root.isEdit() -->
+      <button class="btn btn-primary float-right" data-bind='click:$root.updateGist'>Update Secret Gist</button>
+       <!--/ko-->
+  </form>
+  <br>
+  <br>
+</div>
