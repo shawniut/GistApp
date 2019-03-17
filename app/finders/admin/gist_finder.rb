@@ -6,12 +6,16 @@ class Admin::GistFinder < BaseFinder
 
   def list_private
     response = @gist_client.list :private, per_page:@per_page, page:@page
-    map_results(response)
+    Result.new(true,nil,map_results(response),meta:pagination_dict(response) )
+  rescue Exception => e
+    return_error_result
   end
 
-  def list_starred
-    response = @gist_client.list :private, per_page:@per_page, page:@page
-    map_models(response)
+  def list_starred!
+    response = @gist_client.starred :private, per_page:@per_page, page:@page
+    Result.new(true,nil,map_results(response),meta:pagination_dict(response) )
+  rescue Exception => e
+    return_error_result
   end
 
   private

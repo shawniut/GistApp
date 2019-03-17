@@ -39,6 +39,14 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem "omniauth-github", '1.1.1'
 gem "github_api"
 
+gem 'mini_racer'
+gem 'jquery-rails'
+gem 'bootstrap', '~> 4.0.0'
+
+#Use for API model serialization
+gem 'active_model_serializers', '~> 0.10.0'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

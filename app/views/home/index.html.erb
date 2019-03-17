@@ -1,7 +1,7 @@
 <%if current_user%>
   Welcome <%current_user.name%>
   <br>
-  <a href="/signout">Sign Out</a>
+  <a class= 'btn btn-primary' href="/signout">Sign Out</a>
 <%else %>
-<a href="/auth/github">Login To Github</a>
+<a class= 'btn btn-primary' href="/auth/github">Login To Github</a>
 <%end%>
