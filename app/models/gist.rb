@@ -19,12 +19,14 @@ class Gist
   end
 
   def build_from_response(object)
+    puts object.history[0].version
     self.id                 = object.id
     self.description        = object.description
     self.comments_count     = object.comments
     self.created_at         = DateTime.parse(object.created_at)
     self.updated_at         = DateTime.parse(object.updated_at)
     self.files              = object.files.map { |filename,file| GistFile.new(filename:filename,content:file.content,language:file.language,type:file.type,size:file.size,truncated:file.truncated) }
+    self.histories          = object.history.map { |h| History.new(version:h.version,committed_at: DateTime.parse(h.committed_at),additions:h.change_status.additions,deletions:h.change_status.deletions,total:h.change_status.total) }
   end
 
   def to_api

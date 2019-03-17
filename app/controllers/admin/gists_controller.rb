@@ -5,8 +5,14 @@ class Admin::GistsController < AdminController
   end
 
   def search
-    result = Admin::GistFinder.new(current_user,params).list_private
+    finder =  Admin::GistFinder.new(current_user,params)
+    result = params[:stared].present? && params[:stared] == 'true' ? finder.list_starred : finder.list_private
     render json: result.response, each_serializer: Admin::GistSerializer,root:'gists',meta: result.meta[:meta], status: :ok
+  end
+
+  def show
+    result = Admin::GistFinder.new(current_user,params).find(params[:id])
+    render json: result.response, serializer: Admin::GistSerializer,root:'gist', status: :ok
   end
 
   def show

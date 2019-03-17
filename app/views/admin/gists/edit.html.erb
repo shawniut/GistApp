@@ -9,10 +9,12 @@
       <div class="col-lg-6 text-right page-title">
           <div>
               <button class="btn btn-danger" data-bind='click:deleteGist'>Delete</button>
+              <button class="btn btn-primary" data-bind='click:showHistory'>View History</button>
               <button class="btn btn-primary" data-bind='click:$root.allGist'>All Gist</button>
           </div>
       </div>
   </div>
 
   <%=render partial: 'gist_form'%>
+  <%=render partial: 'history_modal'%>
 </div>

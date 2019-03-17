@@ -6,6 +6,7 @@
         </div>
         <div class="col-lg-6 text-right page-title">
             <div>
+                <button class="btn btn-info" data-bind="click:toggleStarred,text: $root.stared() ? 'View All':'View Starred'">Create</button>
                 <a class="btn btn-primary" href="/admin/gists/new">Create</a>
                 <button class="btn btn-primary">Create Multiple</button>
             </div>
@@ -13,6 +14,9 @@
     </div>
 
     <div class="content">
+        <p class="text-center text-muted" data-bind='visible:gists().length == 0'>
+            No Private Gists Found
+        </p>
         <table class="table" data-bind='visible:gists().length>0'>
             <thead>
               <th>Description</th>

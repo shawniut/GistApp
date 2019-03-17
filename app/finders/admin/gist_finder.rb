@@ -13,7 +13,7 @@ class Admin::GistFinder < BaseFinder
     return_error_result
   end
 
-  def list_starred!
+  def list_starred
     response = @gist_client.starred :private, per_page:@per_page, page:@page
     Result.new(true,nil,map_results(response),meta:pagination_dict(response) )
   rescue Exception => e
