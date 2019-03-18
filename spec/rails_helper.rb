@@ -62,7 +62,7 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   OmniAuth.config.test_mode = true
-  omniauth_hash = OmniAuth::AuthHash.new(credentials:{token:'2233'},provider:'github',uid:'125544566')
+  omniauth_hash = OmniAuth::AuthHash.new(credentials:{token:'4acf4b30d47d332a7bc117086a754b2441a43f4b'},provider:'github',uid:'125544566')
  
   OmniAuth.config.add_mock(:github, omniauth_hash)
 end

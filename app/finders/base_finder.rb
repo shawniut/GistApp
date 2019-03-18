@@ -16,8 +16,6 @@ class BaseFinder
     total_count = response.count
 
     count_pages = response.count_pages
-    puts total_count
-    puts count_pages
     if count_pages > 0
       last_page_count = response.page(response.count_pages).count
       total_count = ((count_pages-1) * @per_page) + last_page_count

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  validates_presence_of :email
   def self.create_with_omniauth(auth,email)
     create! do |user|
       user.provider = auth["provider"]

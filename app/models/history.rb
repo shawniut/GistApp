@@ -10,7 +10,6 @@ class History
     @deletions          = hash[:deletions]
     @additions          = hash[:additions]
     @total              = hash[:total]
-    @files              = hash[:files].map { |v| GistFile.new(v) } if args[:files].present?
   end
 
 end

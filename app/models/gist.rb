@@ -2,20 +2,20 @@ class Gist
   include ActiveModel::Serialization
   extend ActiveModel::Naming
   include ActiveModel::Validations
-  attr_accessor :id, :description, :created_at,:updated_at, :comments_count, :files,:histories
+  attr_accessor :id, :description,:public, :created_at,:updated_at, :comments_count, :files,:histories
 
   validates_presence_of :description
 
   def initialize args={}
     hash = HashWithIndifferentAccess.new(args)
-    puts hash['description']
-    puts hash[:description]
+    @public = false
     @id                 = hash[:id]
     @description        = hash[:description]
+    @public             = hash[:public]
     @created_at         = hash[:created_at]
+    @updated_at         = hash[:updated_at]
     @comments_count     = hash[:comments_count]
     @files              = hash[:files].map { |v| GistFile.new(v) } if args[:files].present?
-    @histories          = hash[:histories].map { |v| GistFile.new(v) } if args[:histories].present?
   end
 
   def build_from_response(object)
