@@ -1,11 +1,11 @@
 class User < ApplicationRecord
-  def self.create_with_omniauth(auth)
+  def self.create_with_omniauth(auth,email)
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.email = "text_#{SecureRandom.hex}@gists.com"
+      user.email = email
       user.name = auth["info"]["name"]
-      user.github_oauth_token = auth.credentials['token']
+      user.github_oauth_token = auth.credentials["token"]
     end
   end
 end

@@ -15,11 +15,6 @@ class Admin::GistsController < AdminController
     render json: result.response, serializer: Admin::GistSerializer,root:'gist', status: :ok
   end
 
-  def show
-    result = Admin::GistFinder.new(current_user,params).find(params[:id])
-    render json: result.response, serializer: Admin::GistSerializer,root:'gist', status: :ok
-  end
-
   def new
   end
 
@@ -35,6 +30,7 @@ class Admin::GistsController < AdminController
 
   def edit
     @gist = Admin::GistFinder.new(current_user,params).find(params[:id]).response
+    redirect_to root_url if @gist == nil
   end
 
   def update

@@ -11,7 +11,6 @@ class Admin::GistService < Struct.new(:user,:params)
 
   def create(gist)
     if gist.valid?
-      puts gist.to_api
       response = @gist_client.create gist.to_api
       Result.new(true, nil, map_results(response))
     else
