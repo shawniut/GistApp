@@ -23,6 +23,16 @@ FactoryGirl.define do
     files {[FactoryGirl.build(:file1),FactoryGirl.build(:file2)]}
   end
 
+  factory :gist2, class: Gist do
+    description {"Gist 1 description"}
+    files {[FactoryGirl.build(:file2)]}
+  end
+
+  factory :gist3, class: Gist do
+    description {"Gist 1 description"}
+    files {[FactoryGirl.build(:file3)]}
+  end
+
   factory :single_file_gist, class: Gist do
     description {"Gist 1 description"}
     files {[FactoryGirl.build(:file1)]}

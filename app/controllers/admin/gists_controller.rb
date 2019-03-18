@@ -22,30 +22,30 @@ class Admin::GistsController < AdminController
     gist = Gist.new(gist_params)
     result = Admin::GistService.new(current_user).create(gist)
     if result.success
-      render json: {success:result.success,id:result.response.id}
+      render json: {success:result.success,id:result.response.id}, status: :ok
     else
-      render json: {success:result.success,errors:result.errors}
+      render json: {success:result.success,errors:result.errors}, status: :bad_request
     end
   end
 
   def edit
     @gist = Admin::GistFinder.new(current_user,params).find(params[:id]).response
-    redirect_to root_url if @gist == nil
+    render_404 if @gist == nil
   end
 
   def update
     gist = Gist.new(gist_params)
     result = Admin::GistService.new(current_user).update(gist)
     if result.success
-      render json: {success:result.success,id:result.response.id}
+      render json: {success:result.success,id:result.response.id}, status: :ok
     else
-      render json: {success:result.success,errors:result.errors}
+      render json: {success:result.success,errors:result.errors}, status: :bad_request
     end
   end
 
   def destroy
     result = Admin::GistService.new(current_user).delete(params[:id])
-    render json: {success:result.success}
+    render json: {success:result.success}, status: :ok
   end 
 
   private
