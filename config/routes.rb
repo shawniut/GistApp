@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :gists do 
-      get 'search', on: :collection 
+      get 'search',            on: :collection
     end
   end
 
