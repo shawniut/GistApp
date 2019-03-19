@@ -3,7 +3,7 @@
 
 Live APP LINK : https://gistsapp.herokuapp.com/
 
-Following Stories are implemented:
+##Following Stories are implemented:
 
 1)As a github user, I want to be able to list all of my private gists, so that I can see them all
 
@@ -21,14 +21,24 @@ Following Stories are implemented:
 Only backend of this story is implemented
 
 
-To pass the sessions_controller specs it needs to set a real token in the mockauth hash in rails_helper.rb
-
+To pass the specs please set a real TOKEN in the omniauth_hash  in rails_helper.rb and /factories/user.rb
+```
 OmniAuth.config.test_mode = true
   omniauth_hash = OmniAuth::AuthHash.new(
     credentials:{
-        token:'9a1a45e4c1eaf0292ddcee0f6d49601b67c61869'
+        token:'**c13039553fb426c910331dc09fec2e9e040ab4c0**'
       },
       info:{name:'Test User'},
       provider:'github',
       uid:'125544566'
     )
+```
+
+```
+factory :valid_user, class: User do
+  name               { "Valid User" }
+  email              { "testuser@test.com" }
+  github_oauth_token { "**c13039553fb426c910331dc09fec2e9e040ab4c0**" }
+end
+
+```

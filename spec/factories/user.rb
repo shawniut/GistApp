@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :valid_user, class: User do
     name               { "Valid User" }
     email              { "testuser@test.com" }
-    github_oauth_token { "4acf4b30d47d332a7bc117086a754b2441a43f4b" }
+    github_oauth_token { "c13039553fb426c910331dc09fec2e9e040ab4c0" }
   end
 
   factory :invalid_user, class: User do

@@ -64,7 +64,7 @@ RSpec.configure do |config|
   OmniAuth.config.test_mode = true
   omniauth_hash = OmniAuth::AuthHash.new(
     credentials:{
-        token:'9a1a45e4c1eaf0292ddcee0f6d49601b67c61869'
+        token:'c13039553fb426c910331dc09fec2e9e040ab4c0'
       },
       info:{name:'Test User'},
       provider:'github',
