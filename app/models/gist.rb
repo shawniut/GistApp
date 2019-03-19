@@ -19,7 +19,6 @@ class Gist
   end
 
   def build_from_response(object)
-    puts object.history[0].version
     self.id                 = object.id
     self.description        = object.description
     self.comments_count     = object.comments

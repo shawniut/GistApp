@@ -70,7 +70,6 @@ class Admin::GistsController < AdminController
         gist_hash[:files] = files
       end
     end
-    puts gist_hash
     gist_hash
   end
 

@@ -17,22 +17,21 @@ class Admin::GistService < Struct.new(:user,:params)
       Result.new(false, gist.errors.full_messages, nil)
     end
   rescue Exception => e
-    puts e.message
-    puts e.backtrace
+    #puts e.message
+    #puts e.backtrace
     Result.new(false, [e.message], nil)
   end
 
   def update(gist)
     if gist.valid?
-      puts gist.to_api
       response = @gist_client.edit gist.id, gist.to_api
       Result.new(true, nil, map_results(response))
     else
       Result.new(false, gist.errors.full_messages, nil)
     end
   rescue Exception => e
-    puts e.message
-    puts e.backtrace
+    #puts e.message
+    #puts e.backtrace
     Result.new(false, [e.message], nil)
   end
 
@@ -42,8 +41,8 @@ class Admin::GistService < Struct.new(:user,:params)
     end
     Result.new(true, nil, nil)
   rescue Exception => e
-    puts e.message
-    puts e.backtrace
+    #puts e.message
+    #puts e.backtrace
     Result.new(false, ["Error creating gists"], nil)
   end
 
@@ -51,15 +50,14 @@ class Admin::GistService < Struct.new(:user,:params)
     response = @gist_client.delete id
     Result.new(true)
   rescue Exception => e
-    puts e.message
-    puts e.backtrace
+    #puts e.message
+    #puts e.backtrace
     Result.new(false, [e.message], nil)
   end
 
   private
 
   def map_results(response)
-    puts response.files.size
     gist = Gist.new(id: response.id,public: response.public, description: response.description, created_at: DateTime.parse(response.created_at))
     gist.files = []
     response.files.each do |k,f|
