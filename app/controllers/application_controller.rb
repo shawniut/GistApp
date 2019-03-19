@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_root_url
-    redirect_to root_url & return
+    redirect_to root_url && return
   end
   
 end
