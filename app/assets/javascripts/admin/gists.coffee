@@ -113,7 +113,7 @@ class GistCreateEditVM
 
     @removeFile = (file) =>
       if confirm('Are you sure you want to remove the file?')
-        if @isEdit() && file.id()?
+        if @isEdit()
           file.deleted(true)
           file.content(null)
         else

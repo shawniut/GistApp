@@ -20,12 +20,10 @@
       <!-- Navigation -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
           <div class="container">
-              <a class="navbar-brand" href="#">GistApp <%="- #{current_user.email}" if current_user%></a>
+              <a class="navbar-brand" href="/">GistApp <%="- #{current_user.email}" if current_user%></a>
               
               <%if current_user%>
                 <a class= 'btn btn-primary' href="/signout">Sign Out</a>
-              <%else%>
-                <a class= 'btn btn-primary' href="/auth/github">Login With Github</a>
               <%end%>
           </div>
       </nav>
